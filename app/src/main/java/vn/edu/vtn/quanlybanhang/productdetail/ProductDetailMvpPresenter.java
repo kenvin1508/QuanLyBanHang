@@ -11,4 +11,6 @@ public interface ProductDetailMvpPresenter {
     void onSetLikeProduct(Product product);
 
     void onSetDislikeProduct(int id);
+
+    void onCheckExists(int idProduct);
 }

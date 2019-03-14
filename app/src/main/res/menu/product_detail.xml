@@ -8,7 +8,6 @@
         app:showAsAction="always" />
     <item
         android:id="@+id/like"
-
         android:icon="@drawable/dislike"
         android:title="@string/cart_product_like"
         app:showAsAction="always" />

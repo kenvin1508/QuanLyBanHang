@@ -81,6 +81,10 @@ public interface APIService {
     @POST("DonDatHang/TaoHoaDon")
     Call<Bill> createNewBill(@Body Bill bill);
 
+    //Check Exists
+    @POST("SanPhamYeuThich/kiemTra")
+    Call<ProductFavorite> checkExists(@Query("idSanPham") int idProduct,@Query("IdKhachHang") int idCustomer);
+
     @POST("SanPhamYeuThich/themMoi")
     Call<ProductFavorite> setProductFavorite(@Body ProductFavorite favorite);
 

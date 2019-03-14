@@ -42,6 +42,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
             txtCart_badge, txtProductSalePrice, txtPercent, txtDescrip;
     Button btnBuy;
     ImageView imgProduct, imgCart;
+    Menu mMenu;
     WebView wvDes;
 
     Toolbar toolbar;
@@ -97,14 +98,18 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
                 presenter.onSetViewBottomSheet(product);     // Khi click Button Sheet mua hàng
             }
         });
+
+        presenter.onCheckExists(product.getIdSanPham()); // Check Exist Favorite
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.product_detail, menu);
+
         MenuItem item = menu.findItem(R.id.cart);
         View actionView = item.getActionView();
+        mMenu = menu;
 
         txtCart_badge = actionView.findViewById(R.id.txtCart_badge);
         imgCart = actionView.findViewById(R.id.imgCart);
@@ -260,6 +265,20 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
     public void setLikeProduct(ProductFavorite favorite) {
         Log.d("AAAAB", favorite.getIdYeuThich() + "");
         idFavorite = favorite.getIdYeuThich();
+    }
+
+    @Override
+    public void setResultCheckExist(boolean result, int idFavorite) {
+        if (result) {
+            checkStatusLike = true;
+            this.idFavorite = idFavorite;
+            Log.d("AAAA", idFavorite + "");
+            mMenu.getItem(1).setIcon(R.drawable.like_product_detail);
+        } else {
+            checkStatusLike = false;
+            mMenu.getItem(1).setIcon(R.drawable.dislike);
+            this.idFavorite = idFavorite;
+        }
     }
 
 }

@@ -20,13 +20,15 @@ public class ProductDetailPresenter implements ProductDetailMvpPresenter {
     private Context context;
     private ProductDetailMvpView view;
     private APIService service;
-    private SharedPrefsHelper sharedPrefsHelper;
+    private Customer customer;
 
     public ProductDetailPresenter(Context context, ProductDetailMvpView view) {
         this.context = context;
         this.view = view;
         service = APIUtils.getServer();
-        sharedPrefsHelper = new SharedPrefsHelper(context);
+        SharedPrefsHelper sharedPrefsHelper = new SharedPrefsHelper(context);
+        String json = sharedPrefsHelper.sharedPreferences.getString("CUSTOMER", "");
+        customer = new Gson().fromJson(json, Customer.class);
     }
 
     @Override
@@ -41,8 +43,6 @@ public class ProductDetailPresenter implements ProductDetailMvpPresenter {
 
     @Override
     public void onSetLikeProduct(Product product) {
-        String json = sharedPrefsHelper.sharedPreferences.getString("CUSTOMER", "");
-        Customer customer = new Gson().fromJson(json, Customer.class);
         ProductFavorite productFavorite = new ProductFavorite(product.getIdSanPham(), customer.getIdKhachHang());
         ProgressDialogF.showLoading(context);
         service.setProductFavorite(productFavorite).enqueue(new Callback<ProductFavorite>() {
@@ -51,7 +51,6 @@ public class ProductDetailPresenter implements ProductDetailMvpPresenter {
                 Log.d("AAAA", response.code() + "");
                 if (response.code() == 200) {
                     view.setLikeProduct(response.body());
-                    Log.d("AAAA", "zôzzozo");
                 }
                 ProgressDialogF.hideLoading();
 
@@ -83,4 +82,29 @@ public class ProductDetailPresenter implements ProductDetailMvpPresenter {
             }
         });
     }
+
+    @Override
+    public void onCheckExists(int idProduct) {
+        ProgressDialogF.showLoading(context);
+        service.checkExists(idProduct, customer.getIdKhachHang()).enqueue(new Callback<ProductFavorite>() {
+            @Override
+            public void onResponse(Call<ProductFavorite> call, Response<ProductFavorite> response) {
+                if (response.code() == 200) {
+                    view.setResultCheckExist(true, response.body().getIdYeuThich());
+                }
+                if (response.code() == 204) {
+                    view.setResultCheckExist(false, -1);
+                }
+                ProgressDialogF.hideLoading();
+            }
+
+            @Override
+            public void onFailure(Call<ProductFavorite> call, Throwable t) {
+                Log.d("AAAA", t.toString());
+                ProgressDialogF.hideLoading();
+            }
+        });
+    }
+
+
 }

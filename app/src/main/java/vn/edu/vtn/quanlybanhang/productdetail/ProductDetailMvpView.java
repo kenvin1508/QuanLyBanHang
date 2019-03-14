@@ -10,4 +10,6 @@ public interface ProductDetailMvpView {
 
     void setLikeProduct(ProductFavorite favorite);
 
+    void setResultCheckExist(boolean result, int idFavorite);
+
 }
