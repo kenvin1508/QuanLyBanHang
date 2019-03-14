@@ -14,4 +14,6 @@ public interface MainMvpPresenter {
     void onClickNotification();
 
     void onClickSuport();
+
+    void onSendTokenAndId(String token, String id);
 }

@@ -1,4 +1,4 @@
-package vn.edu.vtn.quanlybanhang;
+package vn.edu.vtn.quanlybanhang.util;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -10,6 +10,8 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import vn.edu.vtn.quanlybanhang.R;
 
 public class ProgressDialogF extends AppCompatActivity {
     private static android.app.ProgressDialog mProgressDialog;

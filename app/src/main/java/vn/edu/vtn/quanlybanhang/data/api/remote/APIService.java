@@ -22,14 +22,21 @@ import vn.edu.vtn.quanlybanhang.data.model.ProductCategory;
 import vn.edu.vtn.quanlybanhang.data.model.address.Province;
 import vn.edu.vtn.quanlybanhang.data.model.address.XaPhuong;
 import vn.edu.vtn.quanlybanhang.data.model.bill.BillList;
+import vn.edu.vtn.quanlybanhang.data.model.bill.LoginFCM;
 import vn.edu.vtn.quanlybanhang.data.model.bill.PagingBill;
 import vn.edu.vtn.quanlybanhang.data.model.Password;
 import vn.edu.vtn.quanlybanhang.data.model.bill.ProductBillDetail;
 
 public interface APIService {
     //Check Login
-    @GET("KhachHang/DangNhap")
-    Call<Customer> getInfo(@Query("ten") String email, @Query("matKhau") String password);
+//    @GET("KhachHang/DangNhap")
+//    Call<Customer> getInfo(@Query("ten") String email, @Query("matKhau") String password);
+
+    @POST("KhachHang/DangNhapFCM")
+    Call<Customer> getInfo(@Body LoginFCM loginFCM);
+
+    @GET("KhachHang/DangXuatFCM")
+    Call<Void> logout(@Query("idKhachHang") int id);
 
     // Sign Up New Customer
     @POST("KhachHang/insert")
@@ -91,4 +98,7 @@ public interface APIService {
 
     @GET("DonDatHang/hoaDon")
     Call<ProductBillDetail> getListBillDetail(@Query("id") int id);
+
+    @POST("FCM/TaoMoi")
+    Call<Void> sendTokenAndId(@Query("token") String token, @Query("device") String device);
 }

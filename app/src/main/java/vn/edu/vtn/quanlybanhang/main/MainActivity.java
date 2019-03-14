@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -13,6 +14,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,6 +26,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.google.gson.Gson;
 
 import java.io.File;
@@ -84,7 +90,7 @@ public class MainActivity extends AppCompatActivity
 //        });
     }
 
-//    //
+    //    //
 //    private void toProcessCopyDatabaseFromAssetsToSystem() {
 //        File dbFile = getDatabasePath(DATABASE_NAME);
 //        if (!dbFile.exists()) {
@@ -135,7 +141,8 @@ public class MainActivity extends AppCompatActivity
         drawer = findViewById(R.id.drawer_layout);
         fab = findViewById(R.id.fab);
         navigationView = findViewById(R.id.nav_view);
-       //   toProcessCopyDatabaseFromAssetsToSystem();
+
+        // toProcessCopyDatabaseFromAssetsToSystem();
 
         sharedPrefsHelper = new SharedPrefsHelper(this); // Check Login
         presenter = new MainPresenter(this, MainActivity.this);
@@ -156,6 +163,10 @@ public class MainActivity extends AppCompatActivity
 
         checkLogedin();
 
+        String token = sharedPrefsHelper.sharedPreferences.getString("TOKEN", "");
+        if (TextUtils.isEmpty(token)) {
+            getTokenFCM(); // Save Token And Device Id To Preference And API DB
+        }
 
     }
 
@@ -333,5 +344,26 @@ public class MainActivity extends AppCompatActivity
         if (txtCart_badge != null) {
             txtCart_badge.setText(totalProduct + "");
         }
+    }
+
+    private void getTokenFCM() {
+        final String android_id = Settings.Secure.getString(this.getContentResolver(),
+                Settings.Secure.ANDROID_ID);
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.d("AAAA", "getInstanceId failed", task.getException());
+                            return;
+                        }
+                        // Get new Instance ID token
+                        String token = task.getResult().getToken();
+                        Log.d("AAAA", token);
+                        sharedPrefsHelper.setTokenAndId(token, android_id);
+                        presenter.onSendTokenAndId(token, android_id);
+                    }
+                });
+
     }
 }

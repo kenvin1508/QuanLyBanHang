@@ -41,6 +41,11 @@ public class SharedPrefsHelper {
         String json = new Gson().toJson(customer);
         editor.putString("CUSTOMER", json);
         editor.commit();
-        Log.d("AAAA", customer.getName());
+    }
+
+    public void setTokenAndId(String token, String id) {
+        editor.putString("TOKEN", token);
+        editor.putString("ID", id);
+        editor.commit();
     }
 }

@@ -35,8 +35,19 @@
         <activity android:name=".pay.PayActivity" />
         <activity android:name=".pay.newAddress.NewAddressActivity" />
         <activity
-            android:name=".ProgressDialogF"
+            android:name=".util.ProgressDialogF"
             android:label="@string/title_activity_test" />
+
+        <service android:name="vn.edu.vtn.quanlybanhang.util.fcm.MyFireBaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name="vn.edu.vtn.quanlybanhang.util.fcm.MyFireBaseIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

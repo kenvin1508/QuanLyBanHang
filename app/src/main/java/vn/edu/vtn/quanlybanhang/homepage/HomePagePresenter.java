@@ -8,11 +8,10 @@ import java.util.ArrayList;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import vn.edu.vtn.quanlybanhang.ProgressDialogF;
+import vn.edu.vtn.quanlybanhang.util.ProgressDialogF;
 import vn.edu.vtn.quanlybanhang.data.api.remote.APIService;
 import vn.edu.vtn.quanlybanhang.data.api.remote.APIUtils;
 import vn.edu.vtn.quanlybanhang.data.model.ListRVProduct;
-import vn.edu.vtn.quanlybanhang.data.model.Product;
 import vn.edu.vtn.quanlybanhang.data.model.ProductCategory;
 import vn.edu.vtn.quanlybanhang.data.model.SaleLists;
 

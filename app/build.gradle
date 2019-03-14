@@ -51,5 +51,9 @@ dependencies {
     implementation 'com.pnikosis:materialish-progress:1.7'
     // Step by step
     implementation 'com.kofigyan.stateprogressbar:stateprogressbar:1.0.0'
+    // FCM
+    implementation 'com.google.firebase:firebase-messaging:17.4.0'
+    implementation 'com.google.firebase:firebase-core:16.0.7'
 
 }
+apply plugin: 'com.google.gms.google-services'
