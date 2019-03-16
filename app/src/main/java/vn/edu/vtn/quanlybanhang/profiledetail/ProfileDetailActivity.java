@@ -1,5 +1,6 @@
 package vn.edu.vtn.quanlybanhang.profiledetail;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
@@ -7,22 +8,33 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
+
+import com.google.gson.Gson;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import vn.edu.vtn.quanlybanhang.R;
 import vn.edu.vtn.quanlybanhang.data.model.Customer;
 import vn.edu.vtn.quanlybanhang.data.model.Password;
+import vn.edu.vtn.quanlybanhang.data.prefs.SharedPrefsHelper;
+import vn.edu.vtn.quanlybanhang.signup.SignUpActivity;
 
 public class ProfileDetailActivity extends AppCompatActivity implements ProfileDetailMvpView {
     Customer customer, customerUpdate;
     TextInputLayout txtName, txtBirthDay, txtOldPass, txtNewPass, txtNewPassAgain, txtLoginEmail;
     TextInputEditText txtBirthDayET, txtNameET, txtLoginEmailET;
     RadioGroup radioGroup;
+    RadioButton radioMale, radioFeMale;
     String sex = "Nam";
     CheckBox ckChagePass;
     Button btnSave;
@@ -30,15 +42,22 @@ public class ProfileDetailActivity extends AppCompatActivity implements ProfileD
     Toolbar toolbar;
 
     ProfileDetailMvpPresenter presenter;
+    SharedPrefsHelper sharedPrefsHelper;
     boolean isVisible = false;
+
+    Calendar calendar = Calendar.getInstance();
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_detail);
-        Intent intent = getIntent();
-        customer = (Customer) intent.getSerializableExtra("CUSTOMER");
+
+        sharedPrefsHelper = new SharedPrefsHelper(this);
+        String json = sharedPrefsHelper.sharedPreferences.getString("CUSTOMER", "");
+        customer = new Gson().fromJson(json, Customer.class);
         presenter = new ProfileDetailPresenter(ProfileDetailActivity.this, this);
+
 
         addControls();
         addEvents();
@@ -58,19 +77,27 @@ public class ProfileDetailActivity extends AppCompatActivity implements ProfileD
         txtNameET = findViewById(R.id.txtNameET);
         txtLoginEmailET = findViewById(R.id.txtLoginEmailET);
         llChangePass = findViewById(R.id.llChangePass);
-        toolbar = findViewById(R.id.toolbar) ;
+        toolbar = findViewById(R.id.toolbar);
+        radioMale = findViewById(R.id.radioMale);
+        radioFeMale = findViewById(R.id.radioFemale);
 
         txtNameET.setText(customer.getName());
         txtLoginEmailET.setText(customer.getEmail());
         txtBirthDayET.setText(customer.getBirthday());
+
+        if (customer.getSex().equals("Nam")) {
+            radioMale.setChecked(true);
+        }
+        if (customer.getSex().equals("Nữ")) {
+            radioFeMale.setChecked(true);
+        }
+
 
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle("Đơn hàng");
         }
-
-
     }
 
     private void addEvents() {
@@ -101,6 +128,12 @@ public class ProfileDetailActivity extends AppCompatActivity implements ProfileD
                 if (checkedId == R.id.radioFemale) {
                     sex = "Nữ";
                 }
+            }
+        });
+        txtBirthDayET.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toProcessShowDatePicker();
             }
         });
     }
@@ -205,5 +238,32 @@ public class ProfileDetailActivity extends AppCompatActivity implements ProfileD
         return validateOldPass() && validateNewPass()
                 && validateNewPassAgain();
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // handle arrow click here
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void toProcessShowDatePicker() {
+
+        DatePickerDialog.OnDateSetListener callBack = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.MONTH, month);
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                txtBirthDayET.setText(sdf.format(calendar.getTime()));
+            }
+        };
+        DatePickerDialog dpd = new DatePickerDialog(ProfileDetailActivity.this, callBack, calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+        dpd.show();
     }
 }

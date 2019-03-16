@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ public class LoginActivity extends AppCompatActivity implements LoginMvpView, Vi
     TextView txtSignup;
     //EditText txtLoginEmail, txtLoginPassword;
     TextInputLayout txtLoginEmail, txtLoginPassword;
+    ImageView imgClose;
     Button btnLogin;
     LoginMvpPresenter loginPresenter;
 
@@ -35,9 +37,11 @@ public class LoginActivity extends AppCompatActivity implements LoginMvpView, Vi
         txtLoginPassword = findViewById(R.id.txtLoginPassword);
         txtSignup = findViewById(R.id.txtSignup);
         btnLogin = findViewById(R.id.btnLogin);
+        imgClose = findViewById(R.id.imgClose);
         loginPresenter = new LoginPresenter(LoginActivity.this, this);
         btnLogin.setOnClickListener(this);
         txtSignup.setOnClickListener(this);
+        imgClose.setOnClickListener(this);
     }
 
     @Override
@@ -71,6 +75,9 @@ public class LoginActivity extends AppCompatActivity implements LoginMvpView, Vi
                 break;
             case R.id.txtSignup:
                 loginPresenter.onClickLogin();
+                break;
+            case R.id.imgClose:
+                finish();
                 break;
         }
     }

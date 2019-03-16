@@ -1,28 +1,11 @@
 package vn.edu.vtn.quanlybanhang.util.fcm;
 
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Build;
-import android.provider.Settings;
 import android.support.annotation.RequiresApi;
-import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-
-import java.util.Date;
-import java.util.Random;
-
-import vn.edu.vtn.quanlybanhang.R;
-import vn.edu.vtn.quanlybanhang.main.MainActivity;
 
 public class MyFireBaseMessagingService extends FirebaseMessagingService {
     NotificationHelper helper;
@@ -32,7 +15,7 @@ public class MyFireBaseMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
         if (remoteMessage.getNotification() != null) { // Có nghĩa là gửi từ Server của Google
-            toProcessShowMess(remoteMessage.getNotification().getBody());
+            toProcessShowMess(remoteMessage.getNotification().getBody(), remoteMessage.getNotification().getTitle());
             return;
         }
         toProcessShowMess(remoteMessage.getData().get("body"), remoteMessage.getData().get("title"));
@@ -40,7 +23,8 @@ public class MyFireBaseMessagingService extends FirebaseMessagingService {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void toProcessShowMess(String body, String title) {
-    //    helper = new NotificationHelper(this);
+        Log.d("AAAA", "Check MyFireBaseMessagingService");
+        //    helper = new NotificationHelper(this);
 //////        Notification.Builder builder = helper.getEDMTChannelNotification(title, body);
 //////        helper.getManager().notify(new Random().nextInt(), builder.build());
 //        helper.showNotification(this, body, );
@@ -75,9 +59,7 @@ public class MyFireBaseMessagingService extends FirebaseMessagingService {
 //        }
 //        int idRandom = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE); // Multiple Notification
 //        notificationManager.notify(idRandom, builder.build());
-        NotificationHelper.setNotification(this,body, title);
-
-
+        NotificationHelper.setNotification(this, body, title);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

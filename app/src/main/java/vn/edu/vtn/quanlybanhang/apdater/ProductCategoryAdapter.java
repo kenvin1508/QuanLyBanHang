@@ -66,7 +66,7 @@ public class ProductCategoryAdapter extends RecyclerView.Adapter<ProductCategory
             txtName.setText(category.getName());
             Glide.with(context)
                     .load(category.getImage())
-                    .apply(new RequestOptions().override(80, 80))
+//                    .apply(new RequestOptions().override(80, 80))
                     .into(imgHinh);
         }
 

@@ -7,13 +7,27 @@ import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Date;
 
 import vn.edu.vtn.quanlybanhang.R;
@@ -23,8 +37,10 @@ public class NotificationHelper {
     private static final String FCM_CHANNEL_ID = "vn.edu.vtn.quanlybanhang";
     private static final String FCM_CHANNEL_NAME = "VTN Channel";
     private NotificationManager manager;
+    static Bitmap bitmap;
 
     public static void setNotification(Context context, String body, String title) {
+        Log.d("AAAA", "Check NotificationHelper");
         String CHANNEL_ID = "my_channel_01";
         CharSequence name = "my_channel";
         String Description = "This is my channel";
@@ -58,12 +74,24 @@ public class NotificationHelper {
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_ONE_SHOT);
 
 
+        try {
+            URL url = new URL("https://salt.tikicdn.com/cache/w320/ts/lp/ef/c1/75/bcd9b80117bc7e4d6a9f19aaf463abc1.jpg");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            bitmap = BitmapFactory.decodeStream(input);
+        } catch (IOException e) {
+            // Log exception
+        }
+
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.drawable.icon_notification)
                 .setContentTitle(title)
                 .setContentText(body)
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent)
+                .setStyle(new NotificationCompat.BigPictureStyle().bigPicture(bitmap))
                 .setColor(context.getResources().getColor(android.R.color.holo_red_dark));
 
         Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);

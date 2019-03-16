@@ -17,7 +17,7 @@ import vn.edu.vtn.quanlybanhang.util.ProgressDialogF;
 public class ProfilePresenter implements ProfileMvpPresenter {
     private Context context;
     private ProfileMvpView view;
-    SharedPrefsHelper sharedPrefsHelper;
+    private SharedPrefsHelper sharedPrefsHelper;
     private APIService service;
     private Customer customer;
 
@@ -33,6 +33,8 @@ public class ProfilePresenter implements ProfileMvpPresenter {
 
     @Override
     public void onGetView() {
+        String json = sharedPrefsHelper.sharedPreferences.getString("CUSTOMER", "");
+        customer = new Gson().fromJson(json, Customer.class);
         view.onSetView(customer);
     }
 

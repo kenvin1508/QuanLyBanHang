@@ -48,4 +48,9 @@ public class SharedPrefsHelper {
         editor.putString("ID", id);
         editor.commit();
     }
+
+    public void setDatabaseName(boolean result) {
+        editor.putBoolean("DBName", result);
+        editor.commit();
+    }
 }

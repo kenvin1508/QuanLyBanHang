@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -35,6 +36,7 @@ public class SignUpActivity extends AppCompatActivity implements SignUpMvpView, 
     TextInputLayout txtName, txtPhone, txtLoginEmail, txtLoginPassword, txtBirthDay, txtUserName;
     TextInputEditText txtBirthDayET;
     TextView txtHaveAccount;
+    ImageView imgClose;
     Button btnSignup;
     RadioButton radioMale, radioFemale;
     RadioGroup radioGroup;
@@ -67,6 +69,7 @@ public class SignUpActivity extends AppCompatActivity implements SignUpMvpView, 
         radioGroup = findViewById(R.id.radioGroup);
         txtBirthDayET = findViewById(R.id.txtBirthDayET);
         txtUserName = findViewById(R.id.txtUsername);
+        imgClose = findViewById(R.id.imgClose);
 
 
         btnSignup = findViewById(R.id.btnSignup);
@@ -75,6 +78,7 @@ public class SignUpActivity extends AppCompatActivity implements SignUpMvpView, 
         signUpPresenter = new SignUpPresenter(SignUpActivity.this, this);
         btnSignup.setOnClickListener(this);
         txtHaveAccount.setOnClickListener(this);
+        imgClose.setOnClickListener(this);
     }
 
     private void addEvents() {
@@ -126,6 +130,9 @@ public class SignUpActivity extends AppCompatActivity implements SignUpMvpView, 
                 break;
             case R.id.txtHaveAccount:
                 signUpPresenter.onClickOpenLogin();
+                break;
+            case R.id.imgClose:
+                finish();
                 break;
         }
     }

@@ -65,9 +65,9 @@ public class MainActivity extends AppCompatActivity
     int totalProduct;
 
 
-//    String DATABASE_NAME = "CartProduct.db";
-//    String DB_PATH_SUFFIX = "/databases/";
-//    SQLiteDatabase database = null;
+    String DATABASE_NAME = "CartProduct.db";
+    String DB_PATH_SUFFIX = "/databases/";
+    SQLiteDatabase database = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,49 +91,43 @@ public class MainActivity extends AppCompatActivity
     }
 
     //    //
-//    private void toProcessCopyDatabaseFromAssetsToSystem() {
-//        File dbFile = getDatabasePath(DATABASE_NAME);
-//        if (!dbFile.exists()) {
-//            try {
-//                toCopyDatabaseFormAsset();
-//                Toast.makeText(MainActivity.this, "Sao chép thành công", Toast.LENGTH_LONG).show();
-//
-//            } catch (Exception e) {
-//                Toast.makeText(MainActivity.this, "ABC" + e.toString(), Toast.LENGTH_LONG).show();
-//            }
-//        } else {
-//            Toast.makeText(MainActivity.this, DATABASE_NAME + " Đã tồn tại trong hệ thống", Toast.LENGTH_LONG).show();
-//        }
-//
-//    }
-//
-//    private void toCopyDatabaseFormAsset() {
-//        try {
-//            InputStream myInput = getAssets().open(DATABASE_NAME); // mở file lên
-//            String outFileName = toGetDatabasePath(); // lấy cái đường dẫn lưu trữ
-//            File file = new File(getApplicationInfo().dataDir + DB_PATH_SUFFIX);
-//            if (!file.exists()) {// kiểm tra cái thư mục databases đã tồn tại chưa nếu chưa thì tạo
-//                file.mkdir();
-//            }
-//            OutputStream myOutput = new FileOutputStream(outFileName);
-//            byte[] buffer = new byte[1024];
-//            int length;
-//            while ((length = myInput.read(buffer)) > 0) {
-//                myOutput.write(buffer, 0, length);
-//            }
-//            myOutput.flush();
-//            myOutput.close();
-//            myInput.close();
-//
-//        } catch (Exception e) {
-//            Log.e("Lỗi Sao Chép !!!", e.toString());
-//        }
-//    }
-//
-//    private String toGetDatabasePath() {
-//        return getApplicationInfo().dataDir + DB_PATH_SUFFIX + DATABASE_NAME; // Trả về đường dẫn phải lưu trữ
-//
-//    }
+    private void toProcessCopyDatabaseFromAssetsToSystem() {
+        try {
+            toCopyDatabaseFormAsset();
+
+        } catch (Exception e) {
+            Toast.makeText(MainActivity.this, "ABC" + e.toString(), Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+    private void toCopyDatabaseFormAsset() {
+        try {
+            InputStream myInput = getAssets().open(DATABASE_NAME); // mở file lên
+            String outFileName = toGetDatabasePath(); // lấy cái đường dẫn lưu trữ
+            File file = new File(getApplicationInfo().dataDir + DB_PATH_SUFFIX);
+            if (!file.exists()) {// kiểm tra cái thư mục databases đã tồn tại chưa nếu chưa thì tạo
+                file.mkdir();
+            }
+            OutputStream myOutput = new FileOutputStream(outFileName);
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = myInput.read(buffer)) > 0) {
+                myOutput.write(buffer, 0, length);
+            }
+            myOutput.flush();
+            myOutput.close();
+            myInput.close();
+
+        } catch (Exception e) {
+            Log.e("Lỗi Sao Chép !!!", e.toString());
+        }
+    }
+
+    private String toGetDatabasePath() {
+        return getApplicationInfo().dataDir + DB_PATH_SUFFIX + DATABASE_NAME; // Trả về đường dẫn phải lưu trữ
+
+    }
 
     private void addControls() {
 
@@ -141,16 +135,25 @@ public class MainActivity extends AppCompatActivity
         drawer = findViewById(R.id.drawer_layout);
         fab = findViewById(R.id.fab);
         navigationView = findViewById(R.id.nav_view);
-
-        // toProcessCopyDatabaseFromAssetsToSystem();
-
-        sharedPrefsHelper = new SharedPrefsHelper(this); // Check Login
-        presenter = new MainPresenter(this, MainActivity.this);
-        sqliteController = new SqliteController(MainActivity.this);
-        totalProduct = sqliteController.getTotalProduct(); // Get tổng số lượng sản phẩm
-
         setSupportActionBar(toolbar);
 
+        sharedPrefsHelper = new SharedPrefsHelper(this); // Check Login
+
+        File dbFile = getDatabasePath(DATABASE_NAME);
+        boolean result = sharedPrefsHelper.sharedPreferences.getBoolean("DBName", false);
+        if (!dbFile.exists() && !result) {
+            toProcessCopyDatabaseFromAssetsToSystem();
+            sharedPrefsHelper.setDatabaseName(true);
+            Log.d("AAAA", "Thành công !!!");
+
+        } else {
+            Log.d("AAAA", "Đã tồn tại trong hệ thống !!!");
+        }
+
+        presenter = new MainPresenter(this, MainActivity.this);
+        sqliteController = new SqliteController(MainActivity.this);
+
+        totalProduct = sqliteController.getTotalProduct(); // Get tổng số lượng sản phẩm
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
