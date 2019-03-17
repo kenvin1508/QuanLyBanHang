@@ -14,15 +14,15 @@ public class MyFireBaseMessagingService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
-        if (remoteMessage.getNotification() != null) { // Có nghĩa là gửi từ Server của Google
-            toProcessShowMess(remoteMessage.getNotification().getBody(), remoteMessage.getNotification().getTitle());
-            return;
-        }
-        toProcessShowMess(remoteMessage.getData().get("body"), remoteMessage.getData().get("title"));
+//        if (remoteMessage.getNotification() != null) { // Có nghĩa là gửi từ Server của Google
+//            toProcessShowMess(remoteMessage.getNotification().getBody(), remoteMessage.getNotification().getTitle());
+//            return;
+//        }
+        toProcessShowMess(remoteMessage.getData().get("body"), remoteMessage.getData().get("title"), remoteMessage.getData().get("image"));
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void toProcessShowMess(String body, String title) {
+    private void toProcessShowMess(String body, String title, String urlImage) {
         Log.d("AAAA", "Check MyFireBaseMessagingService");
         //    helper = new NotificationHelper(this);
 //////        Notification.Builder builder = helper.getEDMTChannelNotification(title, body);
@@ -59,11 +59,11 @@ public class MyFireBaseMessagingService extends FirebaseMessagingService {
 //        }
 //        int idRandom = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE); // Multiple Notification
 //        notificationManager.notify(idRandom, builder.build());
-        NotificationHelper.setNotification(this, body, title);
+        NotificationHelper.setNotification(this, body, title, urlImage);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private void toProcessShowMess(String body) {
-        toProcessShowMess(body, "From Google !!!");
-    }
+//    @RequiresApi(api = Build.VERSION_CODES.O)
+//    private void toProcessShowMess(String body) {
+//        toProcessShowMess(body, "From Google !!!");
+//    }
 }

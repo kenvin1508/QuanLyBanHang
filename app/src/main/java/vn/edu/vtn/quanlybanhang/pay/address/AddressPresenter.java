@@ -62,6 +62,7 @@ public class AddressPresenter implements AddressMvpPresenter {
     @Override
     public void onDeleteAddress(int id) {
         ProgressDialogF.showLoading(context);
+        Log.d("AAAAID", id + "");
         service.deleteAdress(id).enqueue(new Callback<Address>() {
             @Override
             public void onResponse(Call<Address> call, Response<Address> response) {

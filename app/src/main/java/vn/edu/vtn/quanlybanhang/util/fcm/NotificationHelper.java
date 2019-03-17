@@ -39,13 +39,13 @@ public class NotificationHelper {
     private NotificationManager manager;
     static Bitmap bitmap;
 
-    public static void setNotification(Context context, String body, String title) {
+    public static void setNotification(Context context, String body, String title, String urlImage) {
         Log.d("AAAA", "Check NotificationHelper");
         String CHANNEL_ID = "my_channel_01";
         CharSequence name = "my_channel";
         String Description = "This is my channel";
 
-        int NOTIFICATION_ID = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
+        int NOTIFICATION_ID = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE); // Auto id Notify
 
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -75,7 +75,7 @@ public class NotificationHelper {
 
 
         try {
-            URL url = new URL("https://salt.tikicdn.com/cache/w320/ts/lp/ef/c1/75/bcd9b80117bc7e4d6a9f19aaf463abc1.jpg");
+            URL url = new URL(urlImage);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setDoInput(true);
             connection.connect();
