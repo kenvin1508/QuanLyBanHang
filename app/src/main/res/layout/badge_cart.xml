@@ -7,11 +7,11 @@
 
     <ImageView
         android:id="@+id/imgCart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_centerInParent="true"
 
-        android:src="@drawable/cart" />
+        android:src="@drawable/cart_48px" />
 
     <TextView
         android:id="@+id/txtCart_badge"

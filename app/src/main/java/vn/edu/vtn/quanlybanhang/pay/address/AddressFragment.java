@@ -21,6 +21,7 @@ import vn.edu.vtn.quanlybanhang.apdater.pay.AddressReciveAdapter;
 import vn.edu.vtn.quanlybanhang.data.model.address.AddressLists;
 import vn.edu.vtn.quanlybanhang.data.prefs.SharedPrefsHelper;
 import vn.edu.vtn.quanlybanhang.pay.newAddress.NewAddressActivity;
+import vn.edu.vtn.quanlybanhang.pay.updateAdress.UpdateAdressActivity;
 
 public class AddressFragment extends Fragment implements AddressMvpView {
     RecyclerView rv_listAddress;
@@ -67,13 +68,12 @@ public class AddressFragment extends Fragment implements AddressMvpView {
         rv_listAddress.setAdapter(addressReciveAdapter);
         toProcessPassAddress(defaultPosition, addressLists);// Địa chỉ mặc định nếu không chọn gì cả !!!
 
-
         addressReciveAdapter.setOnItemClickListener(new AddressReciveAdapter.ClickListener() {
             @Override
             public void onItemClick(int position, View v) {
                 switch (v.getId()) {
                     case R.id.imgEditAddress:
-                        toProcessEdit(position);
+                        toProcessEdit(position, addressLists);
                         break;
                     case R.id.imgDeleteAddress:
                         toprocessDelete(position, addressLists);
@@ -92,12 +92,11 @@ public class AddressFragment extends Fragment implements AddressMvpView {
         sharedPrefsHelper.setData(address); // Lưu địa chỉ được chọn
     }
 
-    private void toProcessEdit(int position) {
-//        Address address =
-//        Intent intent = new Intent(getContext(), NewAddressActivity.class);
-//        intent.
-//        getActivity().startActivity();
-        Toast.makeText(getContext(), "Edit " + position, Toast.LENGTH_SHORT).show();
+    private void toProcessEdit(int position, ArrayList<AddressLists> addressLists) {
+        AddressLists address = addressLists.get(position);
+        Intent intent = new Intent(getContext(), UpdateAdressActivity.class);
+        intent.putExtra("AddressLists", address);
+        startActivity(intent);
     }
 
     private void toprocessDelete(int position, ArrayList<AddressLists> addressLists) {
@@ -107,7 +106,7 @@ public class AddressFragment extends Fragment implements AddressMvpView {
         }
         AddressLists lists = addressLists.get(position);
         presenter.onDeleteAddress(lists.getIdDiaChiKhachHang());
-       // presenter.callData(); // refresh data
+        // presenter.callData(); // refresh data
     }
 
     @Override

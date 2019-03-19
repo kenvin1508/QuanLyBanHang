@@ -66,7 +66,6 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle("");
         }
-        // toProcessCopyDatabaseFromAssetsToSystem();
     }
 
     private void addControls() {
@@ -143,11 +142,11 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
 
     private void toProcessLike(MenuItem item) {
         if (!checkStatusLike) {
-            item.setIcon(R.drawable.like_product_detail);
+            item.setIcon(R.drawable.like_48px);
             checkStatusLike = true;
             presenter.onSetLikeProduct(product); // thêm sản phẩm được yêu thích vào DB
         } else {
-            item.setIcon(R.drawable.dislike);
+            item.setIcon(R.drawable.dislike_48px);
             checkStatusLike = false;
             Log.d("AAAAB", idFavorite + "");
             presenter.onSetDislikeProduct(idFavorite); // Xóa sản phẩm đã được thêm vào DB
@@ -183,15 +182,8 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         String mime = "text/html";
         String encoding = "utf-8";
 
-        wvDes.getSettings().setJavaScriptEnabled(true);
+        wvDes.getSettings().setJavaScriptEnabled(true); // set Description for product
         wvDes.loadDataWithBaseURL(null, des, mime, encoding, null);
-////        txtDescrip.setText(Html.fromHtml(formatDes));
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-//            txtDescrip.setText(Html.fromHtml(formatDes, Html.FROM_HTML_MODE_COMPACT));
-//        } else {
-//            txtDescrip.setText(Html.fromHtml(formatDes));
-//        }
-
 
         Glide.with(this)
                 .load(product.getImage())
@@ -273,10 +265,10 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
             checkStatusLike = true;
             this.idFavorite = idFavorite;
             Log.d("AAAA", idFavorite + "");
-            mMenu.getItem(1).setIcon(R.drawable.like_product_detail);
+            mMenu.getItem(1).setIcon(R.drawable.like_48px);
         } else {
             checkStatusLike = false;
-            mMenu.getItem(1).setIcon(R.drawable.dislike);
+            mMenu.getItem(1).setIcon(R.drawable.dislike_48px);
             this.idFavorite = idFavorite;
         }
     }

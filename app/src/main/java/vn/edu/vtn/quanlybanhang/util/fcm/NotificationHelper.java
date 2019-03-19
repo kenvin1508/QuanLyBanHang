@@ -37,7 +37,7 @@ public class NotificationHelper {
     private static final String FCM_CHANNEL_ID = "vn.edu.vtn.quanlybanhang";
     private static final String FCM_CHANNEL_NAME = "VTN Channel";
     private NotificationManager manager;
-    static Bitmap bitmap;
+    private static Bitmap bitmap;
 
     public static void setNotification(Context context, String body, String title, String urlImage) {
         Log.d("AAAA", "Check NotificationHelper");
@@ -62,7 +62,6 @@ public class NotificationHelper {
             mChannel.setShowBadge(true);
 
             if (notificationManager != null) {
-
                 notificationManager.createNotificationChannel(mChannel);
             }
 

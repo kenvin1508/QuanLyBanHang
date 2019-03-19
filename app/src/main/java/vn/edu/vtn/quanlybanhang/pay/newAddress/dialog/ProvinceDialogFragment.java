@@ -80,16 +80,6 @@ public class ProvinceDialogFragment extends AppCompatDialogFragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                ArrayList<Province> provinces = new ArrayList<>();
-//
-//                for (Province province : list) {
-//                    String dat = s.toString().toLowerCase();
-//                    if (province.getTen().toLowerCase().contains(dat)) {
-//                        provinces.add(province);
-//                    }
-//                }
-//                temp = provinces;
-//                recyclerView.setAdapter(new ProvinceAdapter(getContext(), temp));
                 provinceAdapter.filter(s.toString());
             }
 

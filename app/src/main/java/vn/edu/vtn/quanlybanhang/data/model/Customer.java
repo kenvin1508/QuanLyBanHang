@@ -33,6 +33,15 @@ public class Customer implements Serializable {
     @SerializedName("t_dang_ky")
     @Expose
     private String registrationDate;
+    @SerializedName("tong_don_hang")
+    @Expose
+    private Integer billSuccess;
+    @SerializedName("tong_gia")
+    @Expose
+    private Float totalPrice;
+    @SerializedName("so_san_pham")
+    @Expose
+    private Integer productSucess;
 
 
     public Customer() {
@@ -54,6 +63,30 @@ public class Customer implements Serializable {
         this.sex = sex;
         this.birthday = birthday;
         this.registrationDate = registrationDate;
+    }
+
+    public Integer getBillSuccess() {
+        return billSuccess;
+    }
+
+    public void setBillSuccess(Integer billSuccess) {
+        this.billSuccess = billSuccess;
+    }
+
+    public Float getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Float totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public Integer getProductSucess() {
+        return productSucess;
+    }
+
+    public void setProductSucess(Integer productSucess) {
+        this.productSucess = productSucess;
     }
 
     public Integer getIdKhachHang() {

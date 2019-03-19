@@ -42,7 +42,7 @@
                         android:layout_height="wrap_content"
                         android:text="Địa chỉ người nhận"
                         android:textColor="@android:color/black"
-                        android:textSize="15sp" />
+                        android:textSize="17sp" />
 
 
                     <LinearLayout
@@ -57,7 +57,7 @@
                             android:layout_height="wrap_content"
                             android:text="Võ Tùng Nghĩa"
                             android:textColor="@color/black"
-                            android:textSize="13sp" />
+                            android:textSize="15sp" />
 
                         <TextView
                             android:id="@+id/txtPhone"
@@ -65,7 +65,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:text="0929181615"
-                            android:textSize="13sp" />
+                            android:textSize="15sp" />
 
                         <TextView
                             android:id="@+id/txtAddress"
@@ -73,7 +73,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:text="97 Man Thiện,Phường Hiệp Phú, Quận 9, Hồ Chí Minh"
-                            android:textSize="13sp" />
+                            android:textSize="15sp" />
 
                     </LinearLayout>
 
@@ -103,7 +103,7 @@
                     android:layout_height="wrap_content"
                     android:text="Hình thức giao hàng"
                     android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    android:textSize="17sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -145,7 +145,7 @@
                     android:layout_height="wrap_content"
                     android:text="Hình thức thanh toán"
                     android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    android:textSize="17sp" />
 
 
                 <TextView
@@ -179,7 +179,7 @@
                     android:layout_height="wrap_content"
                     android:text="Thông tin đơn hàng"
                     android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    android:textSize="17sp" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_listCart"

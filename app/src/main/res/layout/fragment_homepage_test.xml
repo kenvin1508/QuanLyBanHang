@@ -17,13 +17,14 @@
             <me.angeldevil.autoscrollviewpager.AutoScrollViewPager
                 android:id="@+id/viewPager"
                 android:layout_width="match_parent"
-                android:layout_height="130dp" />
+                android:layout_height="120dp"
+                android:scaleType="fitXY" />
 
             <me.relex.circleindicator.CircleIndicator
                 android:id="@+id/indicator"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginTop="-40dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="-20dp"
                 app:ci_drawable="@drawable/circleindicator_round" />
 
             <RelativeLayout
@@ -62,8 +63,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginEnd="10dp"
                     android:layout_marginTop="6dp"
+                    android:layout_marginEnd="10dp"
                     android:background="@color/white"
                     android:drawableEnd="@drawable/img_more"
                     android:text="Xem tất cả "
@@ -86,8 +87,7 @@
                 android:id="@+id/rv_product_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white">
-            </android.support.v7.widget.RecyclerView>
+                android:background="@color/white"></android.support.v7.widget.RecyclerView>
 
 
             <android.support.v7.widget.RecyclerView

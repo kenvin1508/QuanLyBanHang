@@ -62,7 +62,7 @@ public class LoginIntractor {
                     apiHelper.onSucess("Login Success !!!");
                     ProgressDialogF.hideLoading();
                 } else {
-                    apiHelper.onFailure("Username or Password is incorrect");
+                    apiHelper.onFailure("Tài khoản hoặc mật khẩu không chính xác !!!");
                     ProgressDialogF.hideLoading();
                 }
             }

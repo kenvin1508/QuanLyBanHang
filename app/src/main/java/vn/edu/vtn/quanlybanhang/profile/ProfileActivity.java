@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+
 import vn.edu.vtn.quanlybanhang.R;
 import vn.edu.vtn.quanlybanhang.data.model.Customer;
 import vn.edu.vtn.quanlybanhang.data.prefs.SharedPrefsHelper;
@@ -19,7 +21,7 @@ import vn.edu.vtn.quanlybanhang.productdetail.ProductDetailActivity;
 import vn.edu.vtn.quanlybanhang.profiledetail.ProfileDetailActivity;
 
 public class ProfileActivity extends AppCompatActivity implements ProfileMvpView {
-    TextView txtProfileName, txtProfilePhone, txtDateRegister;
+    TextView txtProfileName, txtProfilePhone, txtDateRegister, txtBillSuccess, txtTotalPrice, txtProductSuccess;
     ImageView imgEditProfile;
     ProfileMvpPresenter presenter;
     RelativeLayout relativelayoutEdit;
@@ -54,7 +56,11 @@ public class ProfileActivity extends AppCompatActivity implements ProfileMvpView
         imgEditProfile = findViewById(R.id.imgEditProfile);
         txtDateRegister = findViewById(R.id.txtDateRegister);
         relativelayoutEdit = findViewById(R.id.relativelayoutEdit);
+        txtBillSuccess = findViewById(R.id.txtBillSuccess);
+        txtTotalPrice = findViewById(R.id.txtTotalPrice);
+        txtProductSuccess = findViewById(R.id.txtProductSuccess);
         toolbar = findViewById(R.id.toolbar);
+
         presenter = new ProfilePresenter(ProfileActivity.this, this);
         presenter.onGetView();
 
@@ -71,6 +77,12 @@ public class ProfileActivity extends AppCompatActivity implements ProfileMvpView
         txtProfileName.setText(customer.getName());
         txtProfilePhone.setText(customer.getPhone());
         txtDateRegister.setText(customer.getRegistrationDate());
+
+        String formattedPrice = new DecimalFormat("#,### đ").format(customer.getTotalPrice());
+
+        txtBillSuccess.setText(customer.getBillSuccess() + "");
+        txtTotalPrice.setText(formattedPrice);
+        txtProductSuccess.setText(customer.getProductSucess() + "");
     }
 
     @Override

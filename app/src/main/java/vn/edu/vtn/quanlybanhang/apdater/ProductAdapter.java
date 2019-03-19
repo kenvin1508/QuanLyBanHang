@@ -78,9 +78,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                     .load(product.getImage())
                     .into(imageView);
             txtName.setText(product.getName());
-            float price = Float.parseFloat(product.getPriceSale());
-            String formattedPrice = new DecimalFormat("#,### đ").format(price);
-            txtPrice.setText(formattedPrice);
+
+            float salePrice = Float.parseFloat(product.getPriceSale());
+            String formattedSalePrice = new DecimalFormat("#,### đ").format(salePrice);
+            txtPrice.setText(formattedSalePrice);
+
         }
     }
 }

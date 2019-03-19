@@ -59,8 +59,7 @@ public class PayLastAdapter extends RecyclerView.Adapter<PayLastAdapter.ViewHold
             Cart cart = list.get(position);
             txtProductName.setText(cart.getName());
 
-            float price = Float.parseFloat(cart.getPrice());
-            String formattedPrice = new DecimalFormat("#,### đ").format(price);
+            String formattedPrice = new DecimalFormat("#,### đ").format(cart.getSalePrice());
             txtProductSalePrice.setText(formattedPrice);
 
 

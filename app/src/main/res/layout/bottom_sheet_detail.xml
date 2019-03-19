@@ -29,7 +29,7 @@
             android:id="@+id/imgClose"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="70dp"
+            android:layout_marginStart="50dp"
             android:src="@drawable/close_detail" />
 
     </LinearLayout>
@@ -41,11 +41,12 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="154dp">
+            android:layout_height="154dp"
+            android:padding="10dp">
 
             <ImageView
                 android:id="@+id/imgProductImage"
-                android:layout_width="150dp"
+                android:layout_width="135dp"
                 android:layout_height="150dp"
                 android:layout_gravity="center_vertical"
                 android:src="@drawable/rsz_m20" />
@@ -53,7 +54,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginStart="10dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -145,7 +146,8 @@
         android:id="@+id/btnOpenCart"
         android:layout_width="340dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="23dp"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
         android:background="@android:color/holo_red_light"
         android:text="Xem Giỏ Hàng"
         android:textAllCaps="false"

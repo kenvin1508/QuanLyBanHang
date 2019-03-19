@@ -1,11 +1,12 @@
-package vn.edu.vtn.quanlybanhang.pay.newAddress;
+package vn.edu.vtn.quanlybanhang.pay.updateAdress;
 
+import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.text.InputType;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import java.util.ArrayList;
 
 import vn.edu.vtn.quanlybanhang.R;
+import vn.edu.vtn.quanlybanhang.data.model.address.AddressLists;
 import vn.edu.vtn.quanlybanhang.data.model.address.District;
 import vn.edu.vtn.quanlybanhang.data.model.address.Province;
 import vn.edu.vtn.quanlybanhang.data.model.address.XaPhuong;
@@ -20,29 +22,30 @@ import vn.edu.vtn.quanlybanhang.pay.newAddress.dialog.DistrictDialogFragment;
 import vn.edu.vtn.quanlybanhang.pay.newAddress.dialog.ProvinceDialogFragment;
 import vn.edu.vtn.quanlybanhang.pay.newAddress.dialog.XaPhuongDialogFragment;
 
-public class NewAddressActivity extends AppCompatActivity implements NewAddressMvpView
-        , ProvinceDialogFragment.EditNameDialogListener
+public class UpdateAdressActivity extends AppCompatActivity implements UpdateAdressMvpView, ProvinceDialogFragment.EditNameDialogListener
         , DistrictDialogFragment.DistrictDialogListener, XaPhuongDialogFragment.XaPhuongDialogListener {
     TextInputLayout txtName, txtPhone, txtProvince, txtDistrict, txtPhuongXa, txtHomeAddress;
     TextInputEditText txtProvinceET, txtDistrictET, txtPhuongXaET, txtAddressET, txtCustomerNameET, txtPhoneET;
     Button btnSubmit;
     Toolbar toolbar;
-    NewAddressMvpPresenter mvpPresenter;
+    UpdateAdressMvpPresenter mvpPresenter;
     String provinceCode, districtCode, XaPhuongCode;
 
+    AddressLists address;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_address);
+        setContentView(R.layout.activity_update_adress);
         addControls();
         addEvents();
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Thêm địa chỉ mới");
+            getSupportActionBar().setTitle("Cập nhập địa chỉ");
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
+
 
     private void addControls() {
         toolbar = findViewById(R.id.toolbar);
@@ -62,8 +65,20 @@ public class NewAddressActivity extends AppCompatActivity implements NewAddressM
         txtCustomerNameET = findViewById(R.id.txtCustomerNameET);
         txtPhoneET = findViewById(R.id.txtPhoneET);
 
-        mvpPresenter = new NewAddressPresenter(NewAddressActivity.this, this);
+        mvpPresenter = new UpdateAdressPresenter(UpdateAdressActivity.this, this);
 
+        Intent intent = getIntent();
+        address = (AddressLists) intent.getSerializableExtra("AddressLists");
+
+        txtAddressET.setText(address.getTenDiaChi());
+        txtPhoneET.setText(address.getSoDt());
+        txtCustomerNameET.setText(address.getTenKhachHang());
+        txtProvinceET.setText(address.getTenTinh());
+        provinceCode = address.getIdTinh();
+        txtDistrictET.setText(address.getTenQuanHuyen());
+        districtCode = address.getIdQuanHuyen();
+        txtPhuongXaET.setText(address.getTenXaPhuong());
+        XaPhuongCode = address.getIdXaPhuong();
 
     }
 
@@ -85,9 +100,6 @@ public class NewAddressActivity extends AppCompatActivity implements NewAddressM
             return false;
         } else if (phoneInput.length() > 10) {
             txtPhone.setError("Số điện thoại quá cỡ !!!");
-            return false;
-        } else if (phoneInput.length() < 10) {
-            txtPhone.setError("Số điện thoại quá ít !!!");
             return false;
         } else {
             txtPhone.setError(null);
@@ -149,7 +161,6 @@ public class NewAddressActivity extends AppCompatActivity implements NewAddressM
 
     }
 
-
     public boolean confirmInput() {
         return validateName() && validatePhone() && validateProvince()
                 && validateDistrict() && validatePhuongXa() && validateAddress();
@@ -157,18 +168,6 @@ public class NewAddressActivity extends AppCompatActivity implements NewAddressM
     }
 
     private void addEvents() {
-
-//        txtProvinceET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//            @Override
-//            public void onFocusChange(View v, boolean hasFocus) {
-//                if (hasFocus) {
-//                    mvpPresenter.openProvinceDialog();
-//                }
-//
-//            }
-//        });
-        // txtProvinceET.setInputType(InputType.TYPE_NULL);
-
         txtProvinceET.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -202,33 +201,14 @@ public class NewAddressActivity extends AppCompatActivity implements NewAddressM
                 if (!confirmInput()) {
                     return;
                 }
-                String address = txtAddressET.getText().toString();
+                String defaultAddress = txtAddressET.getText().toString();
                 String phone = txtPhoneET.getText().toString();
                 String name = txtCustomerNameET.getText().toString();
-                mvpPresenter.getData(name, phone, provinceCode, districtCode, XaPhuongCode, address, true); // Add new address
+                AddressLists addressLists = new AddressLists(address.getIdDiaChiKhachHang(), defaultAddress, phone, address.getIdKhachHang(), name, provinceCode, districtCode, XaPhuongCode);
+                mvpPresenter.getData(addressLists); // Add new address
                 finish();
             }
         });
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onAddNewAddressSucess(String mess) {
-
-    }
-
-    @Override
-    public void onAddNewAddressFailure(String mess) {
-
     }
 
     @Override
@@ -265,7 +245,6 @@ public class NewAddressActivity extends AppCompatActivity implements NewAddressM
         xaPhuongDialogFragment.show(getSupportFragmentManager(), "Show dialog");
     }
 
-
     // set text cho EditText
     @Override
     public void onFinishEditDialog(String provinceName, String provinceCode) {
@@ -290,10 +269,13 @@ public class NewAddressActivity extends AppCompatActivity implements NewAddressM
         this.XaPhuongCode = XaPhuongCode;
     }
 
-    public boolean isValidEmailAddress(String email) {
-        String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
-        java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
-        java.util.regex.Matcher m = p.matcher(email);
-        return m.matches();
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

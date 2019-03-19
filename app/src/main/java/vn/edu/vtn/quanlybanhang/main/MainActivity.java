@@ -67,7 +67,6 @@ public class MainActivity extends AppCompatActivity
 
     String DATABASE_NAME = "CartProduct.db";
     String DB_PATH_SUFFIX = "/databases/";
-    SQLiteDatabase database = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +79,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void addEvents() {
-//
 //        fab.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -90,7 +88,6 @@ public class MainActivity extends AppCompatActivity
 //        });
     }
 
-    //    //
     private void toProcessCopyDatabaseFromAssetsToSystem() {
         try {
             toCopyDatabaseFormAsset();
@@ -167,6 +164,7 @@ public class MainActivity extends AppCompatActivity
         checkLogedin();
 
         String token = sharedPrefsHelper.sharedPreferences.getString("TOKEN", "");
+        Log.d("AAAA", token);
         if (TextUtils.isEmpty(token)) {
             getTokenFCM(); // Save Token And Device Id To Preference And API DB
         }
@@ -291,6 +289,7 @@ public class MainActivity extends AppCompatActivity
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, new HomePageFragment())
+
                 .commit();
     }
 
@@ -299,6 +298,7 @@ public class MainActivity extends AppCompatActivity
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, new ProductCategoryFragment())
+                .addToBackStack(null)
                 .commit();
     }
 
@@ -307,6 +307,7 @@ public class MainActivity extends AppCompatActivity
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, new BillManagementFragment())
+                .addToBackStack(null)
                 .commit();
     }
 
@@ -320,6 +321,7 @@ public class MainActivity extends AppCompatActivity
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, new ProductFavoriteFragment())
+                .addToBackStack(null)
                 .commit();
     }
 

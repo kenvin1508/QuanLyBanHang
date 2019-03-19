@@ -52,6 +52,7 @@ public class ProductNestedRVAdapter extends RecyclerView.Adapter<ProductNestedRV
         ProductAdapter itemListDataAdapter = new ProductAdapter(mContext, singleSectionItems);
 
         viewHolder.recycler_view_list.setHasFixedSize(true);
+        viewHolder.recycler_view_list.setNestedScrollingEnabled(false);
         viewHolder.recycler_view_list.setLayoutManager(new GridLayoutManager(mContext, 2, GridLayoutManager.HORIZONTAL, false));
         viewHolder.recycler_view_list.setAdapter(itemListDataAdapter);
 

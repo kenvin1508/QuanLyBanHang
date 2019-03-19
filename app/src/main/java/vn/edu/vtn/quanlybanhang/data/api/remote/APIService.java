@@ -75,6 +75,9 @@ public interface APIService {
     @POST("DiaChiKhachHang/taoDiaChiMoi")
     Call<Address> CreateNewAddress(@Body Address address);
 
+    @POST("DiaChiKhachHang/update")
+    Call<Void> updateAdress(@Body AddressLists addressLists);
+
     @DELETE("DiaChiKhachHang/XoaDiaChi")
     Call<Address> deleteAdress(@Query("id") int id);
 
@@ -83,7 +86,7 @@ public interface APIService {
 
     //Check Exists
     @POST("SanPhamYeuThich/kiemTra")
-    Call<ProductFavorite> checkExists(@Query("idSanPham") int idProduct,@Query("IdKhachHang") int idCustomer);
+    Call<ProductFavorite> checkExists(@Query("idSanPham") int idProduct, @Query("IdKhachHang") int idCustomer);
 
     @POST("SanPhamYeuThich/themMoi")
     Call<ProductFavorite> setProductFavorite(@Body ProductFavorite favorite);

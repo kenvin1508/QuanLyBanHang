@@ -39,9 +39,10 @@ public class SaleListAdapter extends PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         SaleLists saleLists = list.get(position);
         ImageView imageView = new ImageView(context);
+        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         Glide.with(context)
                 .load(saleLists.getUrlHinh())
-                .apply(new RequestOptions().override(385, 215))
+//                .apply(new RequestOptions().override(385, 215))
                 .into(imageView);
         container.addView(imageView);
         return imageView;

@@ -23,7 +23,7 @@ public class MyFireBaseMessagingService extends FirebaseMessagingService {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void toProcessShowMess(String body, String title, String urlImage) {
-        Log.d("AAAA", "Check MyFireBaseMessagingService");
+        Log.d("AAAA", "Check MyFireBaseMessagingService " + body + title + urlImage);
         //    helper = new NotificationHelper(this);
 //////        Notification.Builder builder = helper.getEDMTChannelNotification(title, body);
 //////        helper.getManager().notify(new Random().nextInt(), builder.build());
