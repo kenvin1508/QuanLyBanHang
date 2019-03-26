@@ -28,10 +28,10 @@ public class SignUpIntractor {
             @Override
             public void onResponse(Call<Customer> call, Response<Customer> response) {
                 if (response.code() == 400) {
-                    apiHelper.onFailure("Your email was exists !!!");
+                    apiHelper.onFailure("Email hoặc số điện thoại của bạn đã trùng !!!");
                 }
                 if (response.code() == 200) {
-                    apiHelper.onSucess("Sign Up Success !!!");
+                    apiHelper.onSucess("Bạn đã đăng ký thành công, vui lòng kiểm tra email để xác thực tài khoản !!! ");
                 }
                 ProgressDialogF.hideLoading();
             }

@@ -13,15 +13,27 @@ public class PagingProduct {
     @SerializedName("size")
     @Expose
     private int size;
+    @SerializedName("locTheo")
+    @Expose
+    private int sortBy;
 
     public PagingProduct() {
 
     }
 
-    public PagingProduct(int idDanhMuc, int page, int size) {
+    public PagingProduct(int idDanhMuc, int page, int size, int sortBy) {
         this.idDanhMuc = idDanhMuc;
         this.page = page;
         this.size = size;
+        this.sortBy = sortBy;
+    }
+
+    public int getSortBy() {
+        return sortBy;
+    }
+
+    public void setSortBy(int sortBy) {
+        this.sortBy = sortBy;
     }
 
     public int getIdDanhMuc() {

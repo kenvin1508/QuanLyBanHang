@@ -105,11 +105,13 @@ public class SignUpActivity extends AppCompatActivity implements SignUpMvpView, 
     @Override
     public void onSuscess(String mess) {
         Toast.makeText(SignUpActivity.this, mess, Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     @Override
     public void onFailure(String mess) {
         Toast.makeText(SignUpActivity.this, mess, Toast.LENGTH_SHORT).show();
+
     }
 
     @Override

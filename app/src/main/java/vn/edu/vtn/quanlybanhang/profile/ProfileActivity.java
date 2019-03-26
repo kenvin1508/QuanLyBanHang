@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ import vn.edu.vtn.quanlybanhang.data.model.Customer;
 import vn.edu.vtn.quanlybanhang.data.prefs.SharedPrefsHelper;
 import vn.edu.vtn.quanlybanhang.main.MainActivity;
 import vn.edu.vtn.quanlybanhang.productdetail.ProductDetailActivity;
+import vn.edu.vtn.quanlybanhang.profile.addressbooks.AddressBooksActivity;
 import vn.edu.vtn.quanlybanhang.profiledetail.ProfileDetailActivity;
 
 public class ProfileActivity extends AppCompatActivity implements ProfileMvpView {
@@ -25,6 +27,7 @@ public class ProfileActivity extends AppCompatActivity implements ProfileMvpView
     ImageView imgEditProfile;
     ProfileMvpPresenter presenter;
     RelativeLayout relativelayoutEdit;
+    LinearLayout rlAddress;
     Toolbar toolbar;
 
     @Override
@@ -48,6 +51,12 @@ public class ProfileActivity extends AppCompatActivity implements ProfileMvpView
                 startActivity(new Intent(ProfileActivity.this, ProfileDetailActivity.class));
             }
         });
+        rlAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ProfileActivity.this, AddressBooksActivity.class));
+            }
+        });
     }
 
     private void addControls() {
@@ -59,6 +68,7 @@ public class ProfileActivity extends AppCompatActivity implements ProfileMvpView
         txtBillSuccess = findViewById(R.id.txtBillSuccess);
         txtTotalPrice = findViewById(R.id.txtTotalPrice);
         txtProductSuccess = findViewById(R.id.txtProductSuccess);
+        rlAddress = findViewById(R.id.rlAddress);
         toolbar = findViewById(R.id.toolbar);
 
         presenter = new ProfilePresenter(ProfileActivity.this, this);
@@ -73,7 +83,7 @@ public class ProfileActivity extends AppCompatActivity implements ProfileMvpView
 
     @Override
     public void onSetView(Customer customer) {
-        //  Log.d("AAAA", customer.getName() + customer.getPhone() + customer.getRegistrationDate());
+        Log.d("AAAA", customer.getBillSuccess() + customer.getProductSucess() + customer.getName());
         txtProfileName.setText(customer.getName());
         txtProfilePhone.setText(customer.getPhone());
         txtDateRegister.setText(customer.getRegistrationDate());

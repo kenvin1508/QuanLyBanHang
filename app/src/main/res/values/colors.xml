@@ -12,10 +12,12 @@
     <color name="gray_list_product">#b6b6b6</color>
     <color name="gray_mini">#f2f2f2</color>
     <color name="green">#34692f</color>
-    <color name="gray_cart">#F0F0F0</color>
+    <color name="gray_cart">#E0E0E0</color>
+    <color name="gray_address">#E2E2E2</color>
+    <color name="gray_item_product">#F3F3F3</color>
     <color name="black">#000000</color>
 
-    <color name="gray_pay_form">#f4f4f4</color>
+    <color name="gray_pay_form">#FAFAFA</color>
     <color name="gray_pay_form1">#e6e6e6</color>
     <color name="add_new_address">#00a6ff</color>
 

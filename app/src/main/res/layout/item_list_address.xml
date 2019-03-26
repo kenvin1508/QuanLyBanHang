@@ -54,8 +54,8 @@
 
     <ImageView
         android:id="@+id/imgEditAddress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="10dp"
@@ -65,14 +65,14 @@
 
     <ImageView
         android:id="@+id/imgDeleteAddress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="15dp"
         android:padding="3dp"
-        android:src="@drawable/close_detail" />
+        android:src="@drawable/close_48px" />
 
 
     <TextView

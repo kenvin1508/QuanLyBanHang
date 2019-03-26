@@ -3,6 +3,7 @@ package vn.edu.vtn.quanlybanhang.productList;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -27,6 +28,7 @@ public class ProductListPresenter implements ProductListMvpPresenter {
     }
 
     public void getData(PagingProduct pagingProduct) {
+        Toast.makeText(context, pagingProduct.getSortBy() + " ", Toast.LENGTH_SHORT).show();
         ProgressDialogF.showLoading(context);
         service.getProductLists(pagingProduct).enqueue(new Callback<ArrayList<Product>>() {
             @Override

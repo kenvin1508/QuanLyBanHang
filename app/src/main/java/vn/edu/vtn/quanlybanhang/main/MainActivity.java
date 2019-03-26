@@ -91,7 +91,6 @@ public class MainActivity extends AppCompatActivity
     private void toProcessCopyDatabaseFromAssetsToSystem() {
         try {
             toCopyDatabaseFormAsset();
-
         } catch (Exception e) {
             Toast.makeText(MainActivity.this, "ABC" + e.toString(), Toast.LENGTH_LONG).show();
         }
@@ -289,7 +288,6 @@ public class MainActivity extends AppCompatActivity
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, new HomePageFragment())
-
                 .commit();
     }
 

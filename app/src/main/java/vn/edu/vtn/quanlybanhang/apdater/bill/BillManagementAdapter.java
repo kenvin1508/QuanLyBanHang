@@ -60,7 +60,24 @@ public class BillManagementAdapter extends RecyclerView.Adapter<BillManagementAd
             txtBillCode.setText(billList.getId() + "");
             txtOderDate.setText(billList.getNgayLap());
             txtStatus.setText(billList.getTinhTrang());
-
+            if (billList.getTinhTrang().equals("Đặt hàng thành công")) {
+                imgStatus.setImageResource(R.drawable.check_detail);
+            }
+            if (billList.getTinhTrang().equals("Đang đóng gói")) {
+                imgStatus.setImageResource(R.drawable.status_pack);
+            }
+            if (billList.getTinhTrang().equals("Đang vận chuyển")) {
+                imgStatus.setImageResource(R.drawable.status_deliver);
+            }
+            if (billList.getTinhTrang().equals("Đặt hàng thành công")) {
+                imgStatus.setImageResource(R.drawable.status_pay_success);
+            }
+            if (billList.getTinhTrang().equals("Đã hủy")) {
+                imgStatus.setImageResource(R.drawable.check_error);
+            }
+            if (billList.getTinhTrang().equals("VTN đã tiếp nhận đơn hàng")) {
+                imgStatus.setImageResource(R.drawable.status_vtn_receive);
+            }
         }
 
         @Override

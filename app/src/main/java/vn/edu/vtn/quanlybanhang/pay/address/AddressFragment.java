@@ -106,7 +106,7 @@ public class AddressFragment extends Fragment implements AddressMvpView {
         }
         AddressLists lists = addressLists.get(position);
         presenter.onDeleteAddress(lists.getIdDiaChiKhachHang());
-        // presenter.callData(); // refresh data
+        presenter.callData(); // refresh data
     }
 
     @Override

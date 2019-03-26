@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rv_listCart"
                 android:layout_marginTop="5dp"
-                android:height="8dp"
+                android:height="6dp"
                 android:background="@color/gray_cart" />
 
             <LinearLayout
@@ -94,7 +94,7 @@
                     android:padding="10dp">
 
                     <android.support.design.widget.TextInputEditText
-                        android:layout_width="270dp"
+                        android:layout_width="252dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:hint="Nhập mã giảm giá "
@@ -103,7 +103,7 @@
 
                     <Button
                         android:id="@+id/btnSend"
-                        android:layout_width="80dp"
+                        android:layout_width="72dp"
                         android:layout_height="30dp"
                         android:layout_marginStart="10dp"
                         android:background="@android:color/holo_blue_bright"
@@ -115,7 +115,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:height="8dp"
+                    android:height="6dp"
                     android:background="@color/gray_cart" />
             </LinearLayout>
 
@@ -152,7 +152,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/llTemp"
                 android:layout_marginTop="5dp"
-                android:height="8dp"
+                android:height="6dp"
                 android:background="@color/gray_cart" />
 
         </RelativeLayout>

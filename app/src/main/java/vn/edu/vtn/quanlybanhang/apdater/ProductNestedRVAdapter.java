@@ -7,11 +7,9 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -19,10 +17,7 @@ import java.util.ArrayList;
 import vn.edu.vtn.quanlybanhang.R;
 import vn.edu.vtn.quanlybanhang.data.model.ListRVProduct;
 import vn.edu.vtn.quanlybanhang.data.model.Product;
-import vn.edu.vtn.quanlybanhang.main.MainActivity;
 import vn.edu.vtn.quanlybanhang.productList.ProductListFragment;
-import vn.edu.vtn.quanlybanhang.productList.ProductListMvpPresenter;
-import vn.edu.vtn.quanlybanhang.productList.ProductListPresenter;
 
 public class ProductNestedRVAdapter extends RecyclerView.Adapter<ProductNestedRVAdapter.ViewHolder> {
     private ArrayList<ListRVProduct> dataList;
@@ -37,7 +32,7 @@ public class ProductNestedRVAdapter extends RecyclerView.Adapter<ProductNestedRV
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_item, null);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_nested, null);
         return new ViewHolder(v);
     }
 

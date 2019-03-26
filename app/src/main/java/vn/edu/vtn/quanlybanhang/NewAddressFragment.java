@@ -59,7 +59,7 @@ public class NewAddressFragment extends Fragment {
         service = APIUtils.getServer();
         getData();
 
-        listProvince = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.arrTinh)));
+        //listProvince = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.arrTinh)));
 
     }
 

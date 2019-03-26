@@ -70,11 +70,11 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
             float price = Float.parseFloat(product.getPrice());
             String formattedPrice = new DecimalFormat("#,### đ").format(price);
-            txtProductSalePrice.setText(formattedPrice);
+            txtProductPrice.setText(formattedPrice);
 
             float salePrice = Float.parseFloat(product.getPriceSale());
             String formattedSalePrice = new DecimalFormat("#,### đ").format(salePrice);
-            txtProductPrice.setText(formattedSalePrice);
+            txtProductSalePrice.setText(formattedSalePrice);
 
             txtPercent.setText("-" + product.getPercent() + "%");
 
@@ -101,6 +101,11 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     public void addProducts(ArrayList<Product> products) {
         productLists.addAll(products);
+        notifyDataSetChanged();
+    }
+
+    public void clearAllItem() {
+        productLists.clear();
         notifyDataSetChanged();
     }
 }

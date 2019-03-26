@@ -1,4 +1,4 @@
-package vn.edu.vtn.quanlybanhang.pay.address;
+package vn.edu.vtn.quanlybanhang.profile.addressbooks;
 
 import android.content.Context;
 import android.util.Log;
@@ -10,27 +10,26 @@ import java.util.ArrayList;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import vn.edu.vtn.quanlybanhang.util.ProgressDialogF;
 import vn.edu.vtn.quanlybanhang.data.api.remote.APIService;
 import vn.edu.vtn.quanlybanhang.data.api.remote.APIUtils;
+import vn.edu.vtn.quanlybanhang.data.model.Customer;
 import vn.edu.vtn.quanlybanhang.data.model.address.Address;
 import vn.edu.vtn.quanlybanhang.data.model.address.AddressLists;
-import vn.edu.vtn.quanlybanhang.data.model.Customer;
 import vn.edu.vtn.quanlybanhang.data.prefs.SharedPrefsHelper;
+import vn.edu.vtn.quanlybanhang.pay.address.AddressMvpView;
+import vn.edu.vtn.quanlybanhang.util.ProgressDialogF;
 
-
-public class AddressPresenter implements AddressMvpPresenter {
+public class AddressBooksPresenter implements AddressBooksMvpPresenter {
     private Context context;
     private SharedPrefsHelper sharedPrefsHelper;
-    private AddressMvpView view;
+    private AddressBooksMvpView view;
     private APIService service;
 
-    public AddressPresenter(Context context, AddressMvpView view) {
+    public AddressBooksPresenter(Context context, AddressBooksMvpView view) {
         this.context = context;
         this.view = view;
         sharedPrefsHelper = new SharedPrefsHelper(context);
         service = APIUtils.getServer();
-
     }
 
     @Override
@@ -52,7 +51,6 @@ public class AddressPresenter implements AddressMvpPresenter {
 
             @Override
             public void onFailure(Call<ArrayList<AddressLists>> call, Throwable t) {
-                view.onLoadDataFailure(t.toString());
                 Log.d("AAAA", t.toString());
                 ProgressDialogF.hideLoading();
             }
@@ -60,10 +58,10 @@ public class AddressPresenter implements AddressMvpPresenter {
     }
 
     @Override
-    public void onDeleteAddress(int id) {
+    public void onDeleteAddress(Integer idDiaChiKhachHang) {
         ProgressDialogF.showLoading(context);
-        Log.d("AAAAID", id + "");
-        service.deleteAdress(id).enqueue(new Callback<Address>() {
+        Log.d("AAAAID", idDiaChiKhachHang + "");
+        service.deleteAdress(idDiaChiKhachHang).enqueue(new Callback<Address>() {
             @Override
             public void onResponse(Call<Address> call, Response<Address> response) {
                 Log.d("AAAA", response.code() + "");
@@ -76,9 +74,5 @@ public class AddressPresenter implements AddressMvpPresenter {
                 ProgressDialogF.hideLoading();
             }
         });
-    }
-
-    @Override
-    public void onEditAddress() {
     }
 }

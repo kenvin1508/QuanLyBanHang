@@ -43,13 +43,12 @@ public class DistrictDialogFragment extends AppCompatDialogFragment {
             title = getArguments().getString("TITLE", "");
             hintText = getArguments().getString("HINT", "");
             list = (ArrayList<District>) getArguments().getSerializable("LIST");
-
         }
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_province, null);
-
         builder.setView(view);
+
         addControls(view);
         addEvents();
 
@@ -80,16 +79,6 @@ public class DistrictDialogFragment extends AppCompatDialogFragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                ArrayList<District> districts = new ArrayList<>();
-//
-//                for (District district : list) {
-//                    String dat = s.toString().toLowerCase();
-//                    if (district.getTenQuanHuyen().toLowerCase().contains(dat)) {
-//                        districts.add(district);
-//                    }
-//                }
-//                temp = districts;
-//                recyclerView.setAdapter(new DistrictAdapter(getContext(), temp));
                 districtAdapter.filter(s.toString());
             }
 
