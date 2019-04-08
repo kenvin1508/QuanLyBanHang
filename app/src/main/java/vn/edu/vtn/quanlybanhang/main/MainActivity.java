@@ -75,8 +75,8 @@ public class MainActivity extends AppCompatActivity
         addControls();
         addEvents();
 
-
     }
+
 
     private void addEvents() {
 //        fab.setOnClickListener(new View.OnClickListener() {
@@ -164,9 +164,10 @@ public class MainActivity extends AppCompatActivity
 
         String token = sharedPrefsHelper.sharedPreferences.getString("TOKEN", "");
         Log.d("AAAA", token);
-        if (TextUtils.isEmpty(token)) {
+        if (token.equals("")) {
             getTokenFCM(); // Save Token And Device Id To Preference And API DB
         }
+
 
     }
 

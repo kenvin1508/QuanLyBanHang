@@ -63,15 +63,15 @@ public class AddressPresenter implements AddressMvpPresenter {
     public void onDeleteAddress(int id) {
         ProgressDialogF.showLoading(context);
         Log.d("AAAAID", id + "");
-        service.deleteAdress(id).enqueue(new Callback<Address>() {
+        service.deleteAdress(id).enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<Address> call, Response<Address> response) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
                 Log.d("AAAA", response.code() + "");
                 ProgressDialogF.hideLoading();
             }
 
             @Override
-            public void onFailure(Call<Address> call, Throwable t) {
+            public void onFailure(Call<Void> call, Throwable t) {
                 Log.d("AAAA", "onFailure + " + t.toString());
                 ProgressDialogF.hideLoading();
             }

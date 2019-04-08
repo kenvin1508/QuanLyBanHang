@@ -87,7 +87,9 @@ public class AddressBooksActivity extends AppCompatActivity implements AddressBo
         }
         AddressLists lists = addressLists.get(position);
         presenter.onDeleteAddress(lists.getIdDiaChiKhachHang());
+        adapter.deleteAllItem();
         presenter.callData();
+
     }
 
     private void toProcessEdit(int position, ArrayList<AddressLists> addressLists) {

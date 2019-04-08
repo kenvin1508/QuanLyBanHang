@@ -61,15 +61,15 @@ public class AddressBooksPresenter implements AddressBooksMvpPresenter {
     public void onDeleteAddress(Integer idDiaChiKhachHang) {
         ProgressDialogF.showLoading(context);
         Log.d("AAAAID", idDiaChiKhachHang + "");
-        service.deleteAdress(idDiaChiKhachHang).enqueue(new Callback<Address>() {
+        service.deleteAdress(idDiaChiKhachHang).enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<Address> call, Response<Address> response) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
                 Log.d("AAAA", response.code() + "");
                 ProgressDialogF.hideLoading();
             }
 
             @Override
-            public void onFailure(Call<Address> call, Throwable t) {
+            public void onFailure(Call<Void> call, Throwable t) {
                 Log.d("AAAA", "onFailure + " + t.toString());
                 ProgressDialogF.hideLoading();
             }

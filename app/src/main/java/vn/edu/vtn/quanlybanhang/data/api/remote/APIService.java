@@ -79,9 +79,9 @@ public interface APIService {
     Call<Void> updateAdress(@Body AddressLists addressLists);
 
     @DELETE("DiaChiKhachHang/XoaDiaChi")
-    Call<Address> deleteAdress(@Query("id") int id);
+    Call<Void> deleteAdress(@Query("id") int id);
 
-    @POST("DonDatHang/TaoHoaDon")
+    @POST("DonDaưtHang/TaoHoaDon")
     Call<Bill> createNewBill(@Body Bill bill);
 
     //Check Exists
