@@ -34,10 +34,12 @@ import vn.edu.vtn.quanlybanhang.data.model.Product;
 import vn.edu.vtn.quanlybanhang.productdetail.ProductDetailActivity;
 
 public class ProductListFragment extends Fragment implements ProductListMvpView {
+
     RecyclerView rvProductList;
     ProductListAdapter productListAdapter;
-    ProductListMvpPresenter presenter;
     LinearLayoutManager layoutManager;
+
+    ProductListMvpPresenter presenter;
     TextView txtSort;
 
     APIService service = APIUtils.getServer();
@@ -145,7 +147,7 @@ public class ProductListFragment extends Fragment implements ProductListMvpView 
             @Override
             public void run() {
                 PagingProduct pagingProduct = new PagingProduct(id, page, size, productSortType);
-                Toast.makeText(getContext(), page + " " + productSortType, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), page + " " + productSortType, Toast.LENGTH_SHORT).show();
                 service.getProductLists(pagingProduct).enqueue(new Callback<ArrayList<Product>>() {
                     @Override
                     public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {

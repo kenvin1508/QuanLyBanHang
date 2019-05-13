@@ -117,7 +117,9 @@ public class AddressBooksActivity extends AppCompatActivity implements AddressBo
     @Override
     protected void onResume() {
         super.onResume();
-        // adapter.deleteAllItem();
+        if (adapter != null) {
+            adapter.deleteAllItem();
+        }
         presenter.callData();
     }
 }

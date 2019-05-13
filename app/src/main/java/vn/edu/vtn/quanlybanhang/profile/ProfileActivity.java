@@ -83,7 +83,7 @@ public class ProfileActivity extends AppCompatActivity implements ProfileMvpView
 
     @Override
     public void onSetView(Customer customer) {
-        Log.d("AAAA", customer.getBillSuccess() + customer.getProductSucess() + customer.getName());
+        Log.d("AAAA", customer.getTotalPrice() + "");
         txtProfileName.setText(customer.getName());
         txtProfilePhone.setText(customer.getPhone());
         txtDateRegister.setText(customer.getRegistrationDate());

@@ -16,6 +16,4 @@ public interface MainMvpView {
     void onOpenSuport();
 
     void onOpenLogin();
-
-
 }

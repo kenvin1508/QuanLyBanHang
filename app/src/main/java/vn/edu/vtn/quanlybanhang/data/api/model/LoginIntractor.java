@@ -29,30 +29,11 @@ public class LoginIntractor {
 
     public void initRetrofitCall(String email, String password) {
         ProgressDialogF.showLoading(context);
-//        service.getInfo(email, password).enqueue(new Callback<Customer>() {
-//            @Override
-//            public void onResponse(Call<Customer> call, Response<Customer> response) {
-//                Log.d("AAAA", response.code() + "");
-//                if (response.code() == 200) {
-//                    sharedPrefsHelper.setLoggedin(true, response.body());
-//                    apiHelper.onSucess("Login Success !!!");
-//                    ProgressDialogF.hideLoading();
-//                } else {
-//                    apiHelper.onFailure("Username or Password is incorrect");
-//                    ProgressDialogF.hideLoading();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Customer> call, Throwable t) {
-//                apiHelper.onFailure("onFailure " + t.toString());
-//                ProgressDialogF.hideLoading();
-//            }
-//        });
 
         String token = sharedPrefsHelper.sharedPreferences.getString("TOKEN", "");
         String id = sharedPrefsHelper.sharedPreferences.getString("ID", "");
         LoginFCM loginFCM = new LoginFCM(email, password, token, id);
+
         service.getInfo(loginFCM).enqueue(new Callback<Customer>() {
             @Override
             public void onResponse(Call<Customer> call, Response<Customer> response) {

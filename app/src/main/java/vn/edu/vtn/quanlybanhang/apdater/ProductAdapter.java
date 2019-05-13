@@ -77,6 +77,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             Glide.with(context)
                     .load(product.getImage())
                     .into(imageView);
+
             txtName.setText(product.getName());
 
             float salePrice = Float.parseFloat(product.getPriceSale());

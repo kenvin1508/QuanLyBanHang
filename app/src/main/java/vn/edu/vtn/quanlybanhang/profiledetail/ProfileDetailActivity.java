@@ -17,6 +17,7 @@ import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -58,6 +59,10 @@ public class ProfileDetailActivity extends AppCompatActivity implements ProfileD
         customer = new Gson().fromJson(json, Customer.class);
         presenter = new ProfileDetailPresenter(ProfileDetailActivity.this, this);
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("Thông tin cá nhân");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         addControls();
         addEvents();
@@ -169,6 +174,7 @@ public class ProfileDetailActivity extends AppCompatActivity implements ProfileD
     @Override
     public void onUpdateSuccess(String mess) {
         Log.d("AAAA", mess);
+        Toast.makeText(this, "Cập nhật thành công !!!", Toast.LENGTH_SHORT).show();
     }
 
     @Override

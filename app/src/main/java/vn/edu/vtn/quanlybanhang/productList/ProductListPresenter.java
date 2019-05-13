@@ -28,7 +28,7 @@ public class ProductListPresenter implements ProductListMvpPresenter {
     }
 
     public void getData(PagingProduct pagingProduct) {
-        Toast.makeText(context, pagingProduct.getSortBy() + " ", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(context, pagingProduct.getSortBy() + " ", Toast.LENGTH_SHORT).show();
         ProgressDialogF.showLoading(context);
         service.getProductLists(pagingProduct).enqueue(new Callback<ArrayList<Product>>() {
             @Override

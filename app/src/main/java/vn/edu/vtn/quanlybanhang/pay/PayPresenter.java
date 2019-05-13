@@ -2,6 +2,7 @@ package vn.edu.vtn.quanlybanhang.pay;
 
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -85,24 +86,30 @@ public class PayPresenter implements PayMvpPresenter {
         Bill bill = new Bill(addressLists.getIdKhachHang(), 1,
                 sqliteController.getTotalMoney(), registrationDate, addressLists.getSoDt()
                 , addressLists.getIdDiaChiKhachHang(), "", productBills);
-
+        Log.d("AAAAB", addressLists.getIdKhachHang()
+                + " " + sqliteController.getTotalMoney() + " " +
+                registrationDate + " " + addressLists.getSoDt()
+                + " " + addressLists.getIdDiaChiKhachHang() + " " + productBills.size());
         ProgressDialogF.showLoadingDialog(context);
         apiService.createNewBill(bill).enqueue(new Callback<Bill>() {
             @Override
             public void onResponse(Call<Bill> call, Response<Bill> response) {
+                Log.d("AAAA", response.code() + " ");
+
                 if (response.code() == 200) {
                     view.createBillSucess("Bạn đã đặt hàng thành công !!!");
                     sqliteController.toProcessDeleteAll(); // xóa giỏ hàng
-                    ProgressDialogF.hideLoading();
                 }
-
+                ProgressDialogF.hideLoading();
             }
 
             @Override
             public void onFailure(Call<Bill> call, Throwable t) {
                 view.createBillSucess(t.toString() + "");
+                Log.d("AAAA", "onFailure " + t.toString());
                 ProgressDialogF.hideLoading();
             }
+
         });
     }
 

@@ -84,23 +84,8 @@ public class HomePageFragment extends Fragment implements HomePageMvpView {
                 presenter.toOpenProductCategory();
             }
         });
-//        btnMore.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                presenter.toOpenProductCategory();
-//            }
-//        });
-    }
 
-//    private ArrayList<String> fakeListAD() {
-//        ArrayList<String> list = new ArrayList<>();
-//        list.add("https://cf.shopee.vn/file/a6749669a3b7780857604e08a324a86d");
-//        list.add("https://cf.shopee.vn/file/6d4870696b6682356131fb8171a67f0c");
-//        list.add("https://cf.shopee.vn/file/8cd957e297ba63f77e8d4803c0bd115d");
-//        list.add("https://cf.shopee.vn/file/533b40465a75e9b2e27e255caa50fb09");
-//        list.add("https://cf.shopee.vn/file/d9062f9949f552deaa4b510af99ac47c");
-//        return list;
-//    }
+    }
 
     @Override
     public void onCallBackCategorySucess(final ArrayList<ProductCategory> list) {

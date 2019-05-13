@@ -81,7 +81,7 @@ public interface APIService {
     @DELETE("DiaChiKhachHang/XoaDiaChi")
     Call<Void> deleteAdress(@Query("id") int id);
 
-    @POST("DonDaưtHang/TaoHoaDon")
+    @POST("DonDatHang/TaoHoaDon")
     Call<Bill> createNewBill(@Body Bill bill);
 
     //Check Exists

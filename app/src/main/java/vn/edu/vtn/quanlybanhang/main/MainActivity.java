@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity
     NavigationView navigationView;
     ImageView imgCart;
     TextView txtCart_badge;
+
     MainMvpPresenter presenter;
 
     SharedPrefsHelper sharedPrefsHelper;
